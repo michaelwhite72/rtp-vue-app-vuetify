@@ -28,9 +28,15 @@
     <dialog id="payment-details">
       <form method="dialog">
         <h2>Payment Info</h2>
-        <p>PayeeName: {{ PayeeName }}</p>
+        <p>Payee Name: {{ PayeeName }}</p>
+        <p>Payee Account Number: {{ PayeeAccountNumber }}</p>
+        <p>Payee Account Type: {{ PayeeAccountType }}</p>
+        <p>From Account: {{ FromPayeeAccountType }}</p>
+        <p>Amount: {{ Amount }}</p>
+        <p>Memo: {{ Memo }}</p>
+        <p>token: {{ token }}</p>
 
-        <button v-on:click="updatePlace(currentPlace)">Make Payment</button>
+        <button v-on:click="createPayment()">Make Payment</button>
         <button>Cancel</button>
       </form>
     </dialog>
@@ -49,12 +55,12 @@ export default {
       errors: [],
       token: "",
       PayeeName: "Payee Name",
-      PayeeAccountNumber: "",
-      ConfirmPayeeAccountNumber: "",
-      PayeeAccountType: "",
-      FromPayeeAccountType: "",
-      Amount: "",
-      Memo: "",
+      PayeeAccountNumber: "Payee Account Number",
+      ConfirmPayeeAccountNumber: "Confirm Payee Account Number",
+      PayeeAccountType: "Account Type (Savings, Checking, etc)",
+      FromPayeeAccountType: "From Account Type (acct number)",
+      Amount: "Amount",
+      Memo: "Memo",
       currentPlace: {},
     };
   },
@@ -72,11 +78,24 @@ export default {
     },
 
     createPayment: function () {
-      var params = {
-        name: this.PayeeName,
-        address: this.Amount,
+      console.log(this.token);
+      var data = {
+        // token: this.token,
+        debtor: this.PayeeName,
+        amount: this.Amount,
+        paymentInformationId: "1234567890",
+        currency: "USD",
+        creditor: "Mike-Test-Account",
       };
-      console.log(params);
+      console.log(data);
+      axios
+        .post("/api/payment", data)
+        // .then((response) => {
+        //   this.$router.push("/login");
+        // })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     },
   },
 };
