@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const Authenticator = require('./authenticator.js') 
 const FFDC = require('./ffdc.js');
+const cors = require('cors');
 
 const app = express();
 const B2B = new Authenticator();
@@ -11,6 +12,7 @@ app.use(express.static(
     path.resolve(__dirname, '../dist'),
     { maxAge: '1y', etag: false})
 );
+app.use(cors());
 
 app.get('/api/login', async (req, res) => {
     try {
@@ -27,7 +29,6 @@ app.get('*', (req, res) => {
 })
 
 app.post('/api/payment', async (req, res) => {
-    console.log("in payment");
     var data = 
     {
         "sourceId": "Fake Web Payment",
@@ -97,11 +98,12 @@ app.post('/api/payment', async (req, res) => {
 
         res.status(200).send(result);
     } catch (err) {
+        console.log('AllCatch');
         res.status(500).send(err);
     }
     
 })
 
-app.listen(process.env.PORT || 8000, () => {
-    console.log(`Server is listening on port ${process.env.PORT}`);
+app.listen(process.env.BACK_PORT || 8000, () => {
+    console.log(`Server is listening on port ${process.env.BACK_PORT}`);
 });

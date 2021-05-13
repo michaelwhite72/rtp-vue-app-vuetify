@@ -65,10 +65,9 @@ export default {
     };
   },
   async created() {
-    axios.get("/api/login").then((response) => {
-      console.log(response.data);
-      this.token = response.data;
-    });
+    const response = await axios.get("/api/login");
+    const curToken = response.data.token;
+    this.token = curToken;
   },
 
   methods: {
@@ -87,6 +86,7 @@ export default {
         currency: "USD",
         creditor: "Mike-Test-Account",
       };
+      console.log(data);
       axios
         .post("/api/payment", data, {
           headers: { "Content-Type": "application/json" },
