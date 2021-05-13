@@ -34,7 +34,7 @@
         <p>From Account: {{ FromPayeeAccountType }}</p>
         <p>Amount: {{ Amount }}</p>
         <p>Memo: {{ Memo }}</p>
-        <p>token: {{ token }}</p>
+        <!-- <p>token: {{ token }}</p> -->
 
         <button v-on:click="createPayment()">Make Payment</button>
         <button>Cancel</button>
@@ -79,7 +79,7 @@ export default {
 
     createPayment: function () {
       console.log(this.token);
-      var data = {
+      var params = {
         // token: this.token,
         debtor: this.PayeeName,
         amount: this.Amount,
@@ -87,9 +87,15 @@ export default {
         currency: "USD",
         creditor: "Mike-Test-Account",
       };
-      console.log(data);
+      console.log(params);
+      const options = {
+        body: JSON.stringify(params),
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
       axios
-        .post("/api/payment", data)
+        .post("/api/payment", options)
         // .then((response) => {
         //   this.$router.push("/login");
         // })
