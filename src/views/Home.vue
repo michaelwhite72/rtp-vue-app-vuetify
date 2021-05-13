@@ -88,24 +88,20 @@ export default {
         creditor: "Mike-Test-Account",
       };
       console.log(params);
-      const options = {
-        body: JSON.stringify(params),
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
+      // const options = {
+      //   body: JSON.stringify(params),
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      // };
       axios
-<<<<<<< HEAD
-        .post("/api/payment", options)
-        // .then((response) => {
-        //   this.$router.push("/login");
-        // })
-=======
-        .post("/api/payment", data)
+        .post("/api/payment", params, {
+          headers: { "Content-Type": "application/json" },
+        })
+
         .then((response) => {
-           console.log(response.data);
-         })
->>>>>>> dd88df30643969691e386b861e41d814cb4ac1ee
+          console.log(response.data);
+        })
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
