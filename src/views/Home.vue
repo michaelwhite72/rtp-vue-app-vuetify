@@ -64,7 +64,7 @@ export default {
       currentPlace: {},
     };
   },
-  created: function () {
+  async created() {
     axios.get("/api/login").then((response) => {
       console.log(response.data);
       this.token = response.data;
@@ -72,12 +72,12 @@ export default {
   },
 
   methods: {
-    showPayment: function () {
+    showPayment() {
       console.log(this.PayeeName);
       document.querySelector("#payment-details").showModal();
     },
 
-    createPayment: function () {
+    createPayment: async function () {
       console.log(this.token);
       var data = {
         // token: this.token,
@@ -90,9 +90,9 @@ export default {
       console.log(data);
       axios
         .post("/api/payment", data)
-        // .then((response) => {
-        //   this.$router.push("/login");
-        // })
+        .then((response) => {
+           console.log(response.data);
+         })
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
