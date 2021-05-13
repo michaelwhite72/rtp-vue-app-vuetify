@@ -22,7 +22,7 @@
       Memo: <input type="text" v-model="Memo" /><br />
 
       <!-- <button v-on:click="cancel">Cancel</button> -->
-      <button v-on:click="showPayment">Verify Payment</button>
+      <button v-on:click="showPayment()">Verify Payment</button>
     </div>
 
     <dialog id="payment-details">
@@ -77,30 +77,23 @@ export default {
       document.querySelector("#payment-details").showModal();
     },
 
-    createPayment: async function () {
+    async createPayment() {
       console.log(this.token);
-      var params = {
-        // token: this.token,
+      var data = {
+        token: this.token,
         debtor: this.PayeeName,
         amount: this.Amount,
         paymentInformationId: "1234567890",
         currency: "USD",
         creditor: "Mike-Test-Account",
       };
-      console.log(params);
-      // const options = {
-      //   body: JSON.stringify(params),
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // };
       axios
-        .post("/api/payment", params, {
+        .post("/api/payment", data, {
           headers: { "Content-Type": "application/json" },
         })
 
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
