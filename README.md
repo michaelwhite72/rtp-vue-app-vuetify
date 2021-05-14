@@ -37,13 +37,11 @@ PORT=A_NUMBER
 
 ### Test and run
 
-First Step
+first step
 
 ```
 npm run build
 ```
-
-### Test and run
 
 Second Step
 
