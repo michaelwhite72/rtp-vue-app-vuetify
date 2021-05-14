@@ -35,12 +35,9 @@ PORT=A_NUMBER
 
 ## Usage
 
-### Compile project
+### Test and run
 
-> Optionally you can compile the project with babel or any other compiler providing the right dependencies.
-> This project being as simple as possible we did not use compiler to test.
-
-Build the backend to the _build_ directory
+First Step
 
 ```
 npm run build
@@ -48,19 +45,16 @@ npm run build
 
 ### Test and run
 
-Test back-end on configured port
+Second Step
 
 ```
 npm run test
 ```
 
-## Libraries
-
 ### Native OAuth2 B2B _client_credentials_ library
 
-> Allow to get token from the id generated in FFDC.
-> Will cache token locally until expiry.
-
 Utilized [ffdc-simple-oauth-b2b](https://github.com/fusionfabric/ffdc-simple-oauth-b2b) for the B2B OIDC Authentication
+
+### Demonstrate the Application
 
 Navigate to [localhost:8000](http://localhost:8000) to demonstrate the application
