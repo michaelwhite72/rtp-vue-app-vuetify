@@ -28,81 +28,84 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 })
 
-app.post('/api/payment', async (req, res) => {
+pp.post('/api/payment', async (req, res) => {
+    console.log("in payment");
     var data = 
-    {
-        "sourceId": "Fake Web Payment",
+      {
+        "sourceId": "Fake Web Payment - RTP App",
         "initiatingParty": "LOCALOFFICEUS1",
+        // MEMO field 
         "paymentInformationId": req.body.paymentInformationId,
-        "requestedExecutionDate": "2018-12-06",
+        "requestedExecutionDate": "2021-05-04",
         "instructedAmount": 
-        {
-            
+          {
+            // USER SETTABLE AMOUNT FIELD
             "amount": req.body.amount,
+            // CUURENCY FIELD
             "currency": req.body.currency
-            
-        },
+              
+          },
         "paymentIdentification": 
-        {
-            
-            "endToEndId": "1545922187435"
-            
-        },
+          {
+              
+            "endToEndId": "0020012021001"
+              
+          },
         "debtor": 
-        {
-            
+          {
+          //   DEBTOR NAME field in app
             "name": req.body.debtor
-            
-        },
+              
+          },
         "debtorAgent": 
-        {
-            
+          {
+          // Hardcoded
             "identification": "020010001"
-            
-        },
+              
+          },
         "debtorAccountId": 
-        {
-            
-            "identification": "745521145"
-            
-        },
+          {
+          // hardcoded to identify RTP app
+            "identification": "0009132003"
+              
+          },
         "creditor": 
-        {
-            
+          {
+          //   CREDITOR NAME FIELD IN APP
             "name": req.body.creditor
-            
-        },
+              
+          },
         "creditorAgent": 
-        {
-            
+          {
+          // 131000000 - Bank of America *or* 000000007 - CitiBank
             "identification": "131000000"
-            
-        },
+              
+          },
         "creditorAccountId": 
-        
-        {
-            "identification": "1111111111"
-        },
-        "remittanceInformationUnstructured": "RmtInf1234"
-        
-    }
-    const url = "https://api.fusionfabric.cloud/payment/payment-initiation/realtime-payments/v2/us-real-time-payment/tch-rtps/initiate"
-
+          
+          {
+          // HARDCODED FOR RTP APP
+            "identification": "0987654321"
+          },
+        "remittanceInformationUnstructured": "RmtInf7890"
+          
+      };
+    const url = "https://api.fusionfabric.cloud/payment/payment-initiation/realtime-payments/v2/us-real-time-payment/tch-rtps/initiate";
+  
     try {
-        if (!req.body.token) {
-            res.status(500).send("Missing token!");
-        }
-        
-        const ffdc = new FFDC(req.body.token);
-        const result = await ffdc.callAPI(url, data);
-
-        res.status(200).send(result);
+      if (!req.body.token) {
+        res.status(500).send("Missing token!");
+      }
+          
+      const ffdc = new FFDC(req.body.token);
+      const result = await ffdc.callAPI(url, data);
+  
+      res.status(200).send(result);
     } catch (err) {
-        console.log('AllCatch');
-        res.status(500).send(err);
+      res.status(500).send(err);
     }
-    
-})
+      
+  });
 
 app.listen(process.env.BACK_PORT || 8000, () => {
     console.log(`Server is listening on port ${process.env.BACK_PORT}`);
