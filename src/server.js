@@ -28,7 +28,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 })
 
-pp.post('/api/payment', async (req, res) => {
+app.post('/api/payment', async (req, res) => {
     console.log("in payment");
     var data = 
       {
