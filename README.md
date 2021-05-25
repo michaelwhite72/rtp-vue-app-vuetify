@@ -56,5 +56,3 @@ Utilized [ffdc-simple-oauth-b2b](https://github.com/fusionfabric/ffdc-simple-oau
 ### Demonstrate the Application
 
 Navigate to [localhost:8000](http://localhost:8000) to demonstrate the application
-# rtp-vue-app-vuetify
-# rtp-vue-app-vuetify
