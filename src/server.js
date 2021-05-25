@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const Authenticator = require('./authenticator.js') 
 const FFDC = require('./ffdc.js');
-const cors = require('cors');
+const cors = require("cors");
 
 const app = express();
 const B2B = new Authenticator();
@@ -41,7 +41,7 @@ app.post('/api/payment', async (req, res) => {
           {
             // USER SETTABLE AMOUNT FIELD
             "amount": req.body.amount,
-            // CUURENCY FIELD
+            // CURENCY FIELD
             "currency": req.body.currency
               
           },
@@ -54,7 +54,7 @@ app.post('/api/payment', async (req, res) => {
         "debtor": 
           {
           //   DEBTOR NAME field in app
-            "name": req.body.debtor
+            "name": "First American"
               
           },
         "debtorAgent": 
@@ -65,8 +65,8 @@ app.post('/api/payment', async (req, res) => {
           },
         "debtorAccountId": 
           {
-          // hardcoded to identify RTP app
-            "identification": "0009132003"
+          // hardcoded to identify First American in RTP App
+            "identification": "276395636"
               
           },
         "creditor": 
@@ -85,7 +85,7 @@ app.post('/api/payment', async (req, res) => {
           
           {
           // HARDCODED FOR RTP APP
-            "identification": "0987654321"
+            "identification": "1111111111"
           },
         "remittanceInformationUnstructured": "RmtInf7890"
           

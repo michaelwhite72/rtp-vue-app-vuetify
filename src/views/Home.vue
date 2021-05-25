@@ -14,11 +14,11 @@
       <input type="text" v-model="PayeeAccountNumber" /><br />
       Confirm Payee Account Number:
       <input type="text" v-model="ConfirmPayeeAccountNumber" /><br />
-      Select Payee Account type:
-      <input type="text" v-model="PayeeAccountType" /><br />
-      Select from Payee Account Type:
-      <input type="text" v-model="FromPayeeAccountType" /><br />
-      Amount: <input type="text" v-model="Amount" /><br />
+      <!-- Select Payee Account type:
+      <input type="text" v-model="PayeeAccountType" /><br /> -->
+      <!-- Select from Payee Account Type:
+      <input type="text" v-model="FromPayeeAccountType" /><br /> -->
+      Amount (USD): <input type="text" v-model="Amount" /><br />
       Memo: <input type="text" v-model="Memo" /><br />
 
       <!-- <button v-on:click="cancel">Cancel</button> -->
