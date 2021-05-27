@@ -34,7 +34,7 @@ app.post("/api/payment", async (req, res) => {
   console.log("in payment");
   var data = {
     sourceId: "Fake Web Payment - RTP App",
-    initiatingParty: "FirstAmerican",
+    initiatingParty: "LOCALOFFICEUS1",
     // MEMO field
     paymentInformationId: req.body.paymentInformationId,
     requestedExecutionDate: req.body.executionDate,
@@ -54,7 +54,7 @@ app.post("/api/payment", async (req, res) => {
       identification: "020010001",
     },
     debtorAccountId: {
-      identification: "745521145",
+      identification: "276395636",
     },
     creditor: {
       name: req.body.creditor,
