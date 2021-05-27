@@ -34,33 +34,29 @@ app.post("/api/payment", async (req, res) => {
   console.log("in payment");
   var data = {
     sourceId: "Fake Web Payment - RTP App",
-    initiatingParty: "LOCALOFFICEUS1",
+    initiatingParty: "FirstAmerican",
     // MEMO field
     paymentInformationId: req.body.paymentInformationId,
-    requestedExecutionDate: "2021-05-04",
+    requestedExecutionDate: req.body.executionDate,
     instructedAmount: {
       // USER SETTABLE AMOUNT FIELD
       amount: req.body.amount,
       // CURENCY FIELD
-      currency: req.body.currency,
+      currency: "USD",
     },
     paymentIdentification: {
-      endToEndId: "0020012021001",
+      endToEndId: req.body.paymentInformationId,
     },
     debtor: {
-      //   DEBTOR NAME field in app
       name: "First American",
     },
     debtorAgent: {
-      // Hardcoded
       identification: "020010001",
     },
     debtorAccountId: {
-      // hardcoded to identify First American in RTP App
-      identification: "276395636",
+      identification: "745521145",
     },
     creditor: {
-      //   CREDITOR NAME FIELD IN APP
       name: req.body.creditor,
     },
     creditorAgent: {
@@ -69,9 +65,9 @@ app.post("/api/payment", async (req, res) => {
     },
     creditorAccountId: {
       // HARDCODED FOR RTP APP
-      identification: "1111111111",
+      identification: req.body.creditorAccountId,
     },
-    remittanceInformationUnstructured: "RmtInf7890",
+    remittanceInformationUnstructured: req.body.memo,
   };
   const url =
     "https://api.fusionfabric.cloud/payment/payment-initiation/realtime-payments/v2/us-real-time-payment/tch-rtps/initiate";
