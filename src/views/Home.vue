@@ -41,19 +41,23 @@
         <v-row align="center" justify="center">
           <!-- DATE PAYMENT EXECUTED -->
           <v-col class="d-flex" cols="2" sm="4">
-            <v-text-field
-              v-model="executionDate"
+            <v-textarea
+              rows="1"
+              name="executionDate"
               label="Date to be Paid (YYYY-MM-DD)"
+              :value="`${today}`"
+              readonly
               outlined
-            ></v-text-field>
+            ></v-textarea>
           </v-col>
           <!-- AMOUNT FIELD -->
           <v-col class="d-flex" cols="2" sm="4">
-            <v-text-field 
+            <v-text-field
               type="text"
-              v-model="amount" 
-              label="Amount (USD)" 
-              outlined>
+              v-model="amount"
+              label="Amount (USD)"
+              outlined
+            >
             </v-text-field>
           </v-col>
           <!-- MEMO / DESCRIPTION -->
@@ -64,7 +68,6 @@
               outlined
             ></v-text-field>
           </v-col>
-
         </v-row>
       </v-container>
       <!-- END 2ND ROW OF ENTRIES -->
@@ -134,6 +137,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 
 export default {
   data: function () {
@@ -141,6 +145,7 @@ export default {
       // message: "Welcome to Vue.js!",
       errors: [],
       token: "",
+      today: moment().format("YYYY-MM-DD"),
       paymentInformationId: Math.floor(Math.random() * 100000000000),
       names: [
         "Acme Systems",
@@ -161,6 +166,7 @@ export default {
     const response = await axios.get("/api/login");
     const curToken = response.data.token;
     this.token = curToken;
+    return (this.executionDate = moment().format("YYYY-MM-DD"));
   },
 
   methods: {
