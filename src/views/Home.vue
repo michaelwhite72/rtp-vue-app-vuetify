@@ -2,6 +2,11 @@
   <div id="app">
     <v-app id="inspire">
       <!-- FIRST ROW OF ENTRIES -->
+      <v-img
+        lazy-src="../images/large-Payments_Banner-–-2.png"
+        max-height="300"
+        src="../images/large-Payments_Banner-–-2.png"
+      ></v-img>
       <v-container fluid>
         <v-row align="center" justify="center">
           <!-- Autofill Transaction ID -->
