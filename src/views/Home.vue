@@ -35,7 +35,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <!-- SECOND ROW OF ENTRIES / BUTTONS-->
+      <!-- SECOND ROW OF ENTRIES-->
       <v-container fluid>
         <!-- ENTRIES -->
         <v-row align="center" justify="center">
@@ -49,10 +49,14 @@
           </v-col>
           <!-- AMOUNT FIELD -->
           <v-col class="d-flex" cols="2" sm="4">
-            <v-text-field v-model="amount" label="Amount" outlined>
+            <v-text-field 
+              type="text"
+              v-model="amount" 
+              label="Amount (USD)" 
+              outlined>
             </v-text-field>
           </v-col>
-          <!-- CURRENCY -->
+          <!-- MEMO / DESCRIPTION -->
           <v-col class="d-flex" cols="2" sm="4">
             <v-text-field
               v-model="memo"
@@ -60,19 +64,10 @@
               outlined
             ></v-text-field>
           </v-col>
-          <!-- Buttons for review payment and cancel -->
+
         </v-row>
-        <!-- BUTTONS -->
-        <!-- <v-row align="center" justify="center">
-          <v-btn v-on:click="createPayment()" depressed color="primary">
-            Transfer
-          </v-btn>
-          <v-btn depressed color="error">
-            Clear
-          </v-btn>
-        </v-row> -->
       </v-container>
-      <!-- END 2ND ROW OF ENTRIES / BUTTONS -->
+      <!-- END 2ND ROW OF ENTRIES -->
 
       <!-- START POP-UP -->
       <v-row justify="space-around">
@@ -169,10 +164,10 @@ export default {
   },
 
   methods: {
-    showPayment() {
-      console.log(this.PayeeName);
-      document.querySelector("#payment-details").showModal();
-    },
+    // showPayment() {
+    //   console.log(this.PayeeName);
+    //   document.querySelector("#payment-details").showModal();
+    // },
 
     async createPayment() {
       console.log(this.token);
