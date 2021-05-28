@@ -69,6 +69,10 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        <v-row align="center" justify="center">
+          <h1 style="background-color: green">{{ successMsg }}</h1>
+          <h1 style="background-color: orange">{{ errorMsg }}</h1>
+        </v-row>
       </v-container>
       <!-- END 2ND ROW OF ENTRIES -->
 
@@ -78,6 +82,9 @@
           <v-dialog transition="dialog-bottom-transition" max-width="600">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" v-bind="attrs" v-on="on">Verify</v-btn>
+              <v-btn v-on:click="newPayment()" depressed color="grey">
+                Clear / New
+              </v-btn>
             </template>
             <template v-slot:default="dialog">
               <!-- VERIFICATION POP-UP -->
@@ -144,6 +151,8 @@ export default {
     return {
       // message: "Welcome to Vue.js!",
       errors: [],
+      successMsg: "",
+      errorMsg: "",
       token: "",
       today: moment().format("YYYY-MM-DD"),
       paymentInformationId: Math.floor(Math.random() * 100000000000),
@@ -175,6 +184,10 @@ export default {
     //   document.querySelector("#payment-details").showModal();
     // },
 
+    newPayment() {
+      this.$router.go();
+    },
+
     async createPayment() {
       console.log(this.token);
       var data = {
@@ -194,9 +207,11 @@ export default {
 
         .then((response) => {
           console.log(response);
+          this.successMsg = "Payment Successful";
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
+          this.errorMsg = "Payment Unsuccessful";
         });
     },
   },
