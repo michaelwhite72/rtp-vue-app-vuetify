@@ -1,9 +1,9 @@
 # rtp-vue-app
 
-Simple app to use with [fusionfabric.cloud](https://www.fusionfabric.cloud) [api](https://developer.fusionfabric.cloud) and Fusion Global PayPlus
+Simple app to use with [fusionfabric.cloud](https://www.fusionfabric.cloud) Real Time Payment Initiation [API](https://developer.fusionfabric.cloud) and Fusion Global PayPlus
 
 [Contact Co-Author](mailto:pierre.quemard@finastra.com)
-[Contact Co-Author](mailto:michael.whiote@finastra.com)
+[Contact Co-Author](mailto:michael.white@finastra.com)
 
 ## Project setup
 
@@ -30,7 +30,7 @@ CLIENT_SECRET=MyClient_Secret
 TOKEN_URL=
 
 # Server configuration
-PORT=A_NUMBER
+PORT=8000 
 ```
 
 ## Usage
