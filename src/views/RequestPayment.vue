@@ -215,13 +215,14 @@
 
 <script>
 import moment from "moment";
+import axios from "axios";
 
 export default {
   data: function () {
     return {
       message: "Send Request for Payment ",
       today: moment().format("YYYY-MM-DD"),
-      paymentInformationId: Math.floor(Math.random() * 100000000000),
+      paymentInformationId: Math.floor(Math.random() * 10000000000000),
       tuna: { label: "Tuna", val: 0, color: "blue" },
       lobster: { label: "Lobster", val: 0, color: "red" },
       crab: { label: "Crab", val: 0, color: "orange" },
@@ -238,7 +239,11 @@ export default {
       ],
     };
   },
-  created: function () {
+  async created() {
+    const response = await axios.get("/api/login");
+    const curToken = response.data.token;
+    this.token = curToken;
+    // console.log(this.token);
     return (this.executionDate = moment().format("YYYY-MM-DD"));
   },
   methods: {
@@ -265,28 +270,30 @@ export default {
       // console.log(this.token);
       console.log(this.paymentInformationId);
       console.log(this.salesTotal);
-      console.log("account number: 1122334455");
       console.log(this.executionDate);
-      // var data = {
-      //   token: this.token,
-      //   debtor: this.PayeeName,
-      //   amount: this.Amount,
-      //   paymentInformationId: "1234567890",
-      //   currency: "USD",
-      //   creditor: "Mike-Test-Account",
-      // };
-      // console.log(data);
-      // axios
-      //   .post("/api/payment", data, {
-      //     headers: { "Content-Type": "application/json" },
-      //   })
+      var paymentRequestInitiate = {
+        token: this.token,
+        amt: this.salesTotal,
+        dbtrNm: this.customerName,
+        paymentInfId: this.paymentInformationId,
+        // debtor: this.PayeeName,
+        // amount: this.Amount,
+        // paymentInformationId: "1234567890",
+        // currency: "USD",
+        // creditor: "Mike-Test-Account",
+      };
+      console.log(paymentRequestInitiate);
+      axios
+        .post("/api/initiate-payment-request", paymentRequestInitiate, {
+          headers: { "Content-Type": "application/json" },
+        })
 
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     this.errors = error.response.data.errors;
-      //   });
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     },
   },
 };

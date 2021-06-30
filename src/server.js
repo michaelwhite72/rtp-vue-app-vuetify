@@ -125,7 +125,7 @@ app.post("/api/initiate-payment-request", async (req, res) => {
           PmtMtd: "TRF",
           ReqdExctnDt: "2016-08-28",
           Dbtr: {
-            Nm: "NPP DR test2 ACC",
+            Nm: req.body.dbtrNm,
           },
           DbtrAcct: {
             Id: {
@@ -158,7 +158,7 @@ app.post("/api/initiate-payment-request", async (req, res) => {
               Amt: {
                 InstdAmt: {
                   Ccy: "USD",
-                  Amt: 100.222,
+                  Amt: req.body.amt,
                 },
               },
               ChrgBr: "SLEV",
@@ -185,7 +185,7 @@ app.post("/api/initiate-payment-request", async (req, res) => {
       ],
     },
     // need to review this because the var starts with "@" symbol
-    xmlns: "urn:iso:std:iso:20022:tech:xsd:pain.013.001.05",
+    "@xmlns": "urn:iso:std:iso:20022:tech:xsd:pain.013.001.05",
   };
   const url =
     "https://api.fusionfabric.cloud/payment/iso/payment-request/v2/real-time/initiate";
@@ -196,7 +196,7 @@ app.post("/api/initiate-payment-request", async (req, res) => {
     }
 
     const ffdc = new FFDC(req.body.token);
-    const result = await ffdc.callAPI(url, data);
+    const result = await ffdc.callAPI(url, paymentRequestInitiate);
 
     res.status(200).send(result);
   } catch (err) {

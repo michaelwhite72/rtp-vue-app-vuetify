@@ -2,9 +2,7 @@
   <div id="app">
     <v-app-bar app color="pink darken-2">
       <div class="d-flex align-center">
-        <h1>
-          LOBSTER SHACK
-        </h1>
+        <h1>LOBSTER SHACK</h1>
       </div>
 
       <!-- ROUTING BUTTONS INDEX -->
@@ -14,9 +12,7 @@
         Home
       </v-btn>
 
-      <v-btn color="blue" text rounded class="my-2">
-        Manage Payments
-      </v-btn>
+      <v-btn color="blue" text rounded class="my-2"> Manage Payments </v-btn>
 
       <v-btn
         v-on:click="requestPayment()"
@@ -83,12 +79,8 @@
 
         <!-- ACCEPT / DECLINE BUTTONS -->
         <v-col class="d-flex" cols="5" sm="2">
-          <v-btn depressed color="green">
-            MAKE PAYMENT
-          </v-btn>
-          <v-btn depressed color="red">
-            DECLINE
-          </v-btn>
+          <v-btn depressed color="green"> MAKE PAYMENT </v-btn>
+          <v-btn depressed color="red"> DECLINE </v-btn>
         </v-col>
         <!-- accept / decline end -->
       </v-row>
@@ -102,7 +94,7 @@
 import moment from "moment";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       message: "Manage Received Payment Requests!",
       today: moment().format("YYYY-MM-DD"),
@@ -111,7 +103,7 @@ export default {
       amount: "",
     };
   },
-  created: function() {
+  created: function () {
     return (this.executionDate = moment().format("YYYY-MM-DD"));
   },
   methods: {
