@@ -275,12 +275,7 @@ export default {
         token: this.token,
         amt: this.salesTotal,
         dbtrNm: this.customerName,
-        paymentInfId: this.paymentInformationId,
-        // debtor: this.PayeeName,
-        // amount: this.Amount,
-        // paymentInformationId: "1234567890",
-        // currency: "USD",
-        // creditor: "Mike-Test-Account",
+        pmtInfId: this.paymentInformationId,
       };
       console.log(paymentRequestInitiate);
       axios

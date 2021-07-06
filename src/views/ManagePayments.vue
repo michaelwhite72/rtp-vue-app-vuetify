@@ -92,6 +92,7 @@
 
 <script>
 import moment from "moment";
+import axios from "axios";
 
 export default {
   data: function () {
@@ -101,11 +102,21 @@ export default {
       paymentInformationId: Math.floor(Math.random() * 100000000000),
       creditor: "",
       amount: "",
+      debtorId: "1919191919",
     };
   },
   created: function () {
+    axios
+      .get("api/transaction-search-debtorID")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        this.errors = error.response.data.errors;
+      });
     return (this.executionDate = moment().format("YYYY-MM-DD"));
   },
+
   methods: {
     homePage() {
       this.$router.push({ path: "/" });
@@ -115,34 +126,10 @@ export default {
       this.$router.push({ path: "RequestPayment" });
       console.log("RequestPayment");
     },
-
-    async makePayment() {
-      // console.log(this.token);
-      console.log(this.paymentInformationId);
-      console.log(this.salesTotal);
-      console.log("account number: 1122334455");
-      console.log(this.executionDate);
-      // var data = {
-      //   token: this.token,
-      //   debtor: this.PayeeName,
-      //   amount: this.Amount,
-      //   paymentInformationId: "1234567890",
-      //   currency: "USD",
-      //   creditor: "Mike-Test-Account",
-      // };
-      // console.log(data);
-      // axios
-      //   .post("/api/payment", data, {
-      //     headers: { "Content-Type": "application/json" },
-      //   })
-
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     this.errors = error.response.data.errors;
-      //   });
-    },
   },
 };
 </script>
+axios .get("api/transaction-search-debtorID") .then((response) => {
+console.log(response); }) .catch((error) => { this.errors =
+error.response.data.errors; }); return (this.executionDate =
+moment().format("YYYY-MM-DD"));

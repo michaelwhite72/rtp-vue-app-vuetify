@@ -87,10 +87,6 @@ app.post("/api/payment", async (req, res) => {
   }
 });
 
-app.listen(process.env.BACK_PORT || 8000, () => {
-  console.log(`Server is listening on port ${process.env.BACK_PORT}`);
-});
-
 // Payment Request -- ISO20022 v2
 app.post("/api/initiate-payment-request", async (req, res) => {
   console.log("payment request initiated");
@@ -203,3 +199,35 @@ app.post("/api/initiate-payment-request", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+// Transaction Search - Payment Request by Debtor Account
+app.get("api/transaction-search-debtorID", async (req, res) => {
+  console.log("Payments Transaction request in progress");
+  var transactionRequest = {};
+  const url =
+    "https://api.fusionfabric.cloud/payment/operations/search/v1/payment-request?transactionType=RequestForPayment&debtorAccount=1919191919";
+
+  try {
+    if (!req.body.token) {
+      res.status(500).send("Missing token!");
+    }
+
+    const ffdc = new FFDC(req.body.token);
+    const result = await ffdc.callAPI(url, transactionRequest);
+    res.transactionRequest("Content-Type", "application/json");
+    console.log(transactionRequest);
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.listen(process.env.BACK_PORT || 8000, () => {
+  console.log(`Server is listening on port ${process.env.BACK_PORT}`);
+});
+
+// Retrieve Payment Requests By Account Number
+// app.get("/api/retrieve-payment-requests", async (req, res) => {
+//   console.log("retrieving Payment Requests"),
+
+// });
