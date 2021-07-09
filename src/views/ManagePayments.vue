@@ -105,16 +105,14 @@ export default {
       debtorId: "1919191919",
     };
   },
-  created: function () {
-    axios
-      .get("api/transaction-search-debtorID")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        this.errors = error.response.data.errors;
-      });
-    return (this.executionDate = moment().format("YYYY-MM-DD"));
+  async created() {
+    console.log("testing123");
+    const response = await axios.get("/api/login");
+    const curToken = response.data.token;
+    this.token = curToken;
+    console.log(this.token);
+    const transactions = await axios.get("/api/transaction-search-debtorID");
+    console.log(transactions);
   },
 
   methods: {
@@ -129,7 +127,3 @@ export default {
   },
 };
 </script>
-axios .get("api/transaction-search-debtorID") .then((response) => {
-console.log(response); }) .catch((error) => { this.errors =
-error.response.data.errors; }); return (this.executionDate =
-moment().format("YYYY-MM-DD"));

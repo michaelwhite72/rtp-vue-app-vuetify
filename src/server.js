@@ -3,6 +3,7 @@ const express = require("express");
 const Authenticator = require("./authenticator.js");
 const FFDC = require("./ffdc.js");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 const B2B = new Authenticator();
@@ -24,10 +25,6 @@ app.get("/api/login", async (req, res) => {
   } catch (err) {
     res.status(500).send(err);
   }
-});
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 // Make API Payment B2B
@@ -201,29 +198,33 @@ app.post("/api/initiate-payment-request", async (req, res) => {
 });
 
 // Transaction Search - Payment Request by Debtor Account
-app.get("api/transaction-search-debtorID", async (req, res) => {
-  console.log("Payments Transaction request in progress");
-  var transactionRequest = {};
+app.get("/api/transaction-search-debtorID", async (req, res) => {
+  res.json({ msg: "Payments Transaction request in progress" });
   const url =
     "https://api.fusionfabric.cloud/payment/operations/search/v1/payment-request?transactionType=RequestForPayment&debtorAccount=1919191919";
 
-  try {
-    if (!req.body.token) {
-      res.status(500).send("Missing token!");
-    }
+  // try {
+  //   if (!req.body.token) {
+  //     res.status(500).send("Missing token!");
+  //   }
 
-    const ffdc = new FFDC(req.body.token);
-    const result = await ffdc.callAPI(url, transactionRequest);
-    res.transactionRequest("Content-Type", "application/json");
-    console.log(transactionRequest);
-    res.status(200).send(result);
-  } catch (err) {
-    res.status(500).send(err);
-  }
+  //   const ffdc = new FFDC(req.body.token);
+  //   const result = await ffdc.callAPIGet(url);
+  //   // res.transactionRequest("Content-Type", "application/json");
+
+  //   res.status(200).send(result);
+  // } catch (err) {
+  //   res.status(500).send(err);
+  // }
 });
 
-app.listen(process.env.BACK_PORT || 8000, () => {
-  console.log(`Server is listening on port ${process.env.BACK_PORT}`);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
+app.listen(8000, () => {
+  // console.log(`Server is listening on port ${process.env.BACK_PORT}`);
+  console.log(`Server is listening on port 8000`);
 });
 
 // Retrieve Payment Requests By Account Number
